@@ -11,6 +11,7 @@ public class BankAccount implements BankFunctions {
         this.accountNumber = accountNumber;
         this.bankHolderName = bankHolderName;
         this.availableBalance = availableBalance;
+
     }
 
     public int getAccountNumber() {
