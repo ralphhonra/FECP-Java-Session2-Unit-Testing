@@ -14,30 +14,27 @@ public class BankSystem {
 
     static void showUserPromptDisplay() {
         int inputtedChoice = 0;
-        String returnToMenu = "";
+        String returnToMenu = "yes";
 
-        do {
+        while (returnToMenu.equalsIgnoreCase("yes")) {
             displayUserOptions();
-            System.out.print("Enter choice (1-5): ");
+            System.out.print("Enter choice (1-6): ");
             inputtedChoice = Integer.parseInt(input.nextLine());
 
-            if (inputtedChoice == 1) {
-                createAccount();
-            } else if (inputtedChoice == 2) {
-                viewAllAccount();
-            } else if (inputtedChoice == 3) {
-                checkBankBalance();
-            } else if (inputtedChoice == 4) {
-                depositAmount();
-            } else if (inputtedChoice == 5) {
-                withdrawAmount();
-            } else if (inputtedChoice == 6) {
-                break;
+            if (inputtedChoice == 1) createAccount();
+            else if (inputtedChoice == 2) viewAllAccount();
+            else if (inputtedChoice == 3) checkBankBalance();
+            else if (inputtedChoice == 4) depositAmount();
+            else if (inputtedChoice == 5) withdrawAmount();
+            else if (inputtedChoice == 6) break;
+            else {
+                System.out.println("Invalid input!");
+                continue;
             }
 
             System.out.print("Would you like to return to the menu? (yes/no): ");
             returnToMenu = input.nextLine();
-        } while (returnToMenu.equalsIgnoreCase("yes"));
+        }
     }
 
     static void withdrawAmount() {
@@ -52,19 +49,17 @@ public class BankSystem {
             for (BankAccount bankAccount : bankAccounts) {
                 if (bankAccount.getAccountNumber() == inputtedAccountNumber) {
                     if (bankAccount.getAvailableBalance() - inputtedAmountToWithdraw > 0) {
-                        bankAccount.setAvailableBalance(bankAccount.getAvailableBalance() - inputtedAmountToWithdraw);
+                        bankAccount.withdraw(inputtedAmountToWithdraw);
 
                         bankAccount.displayInfo();
-                        System.out.println("\nYour balance has been updated successfully!\n");
-                    } else {
-                        System.out.println("Invalid transaction!");
-                    }
+                        System.out.println("\n======================================");
+                        System.out.println("Your balance has been updated successfully!");
+                        System.out.println("======================================\n");
+                    } else System.out.println("Invalid transaction!");
 
                 }
             }
-        } else {
-            System.out.println("Transaction cancelled.");
-        }
+        } else System.out.println("Transaction cancelled.");
     }
 
     static void depositAmount() {
@@ -78,32 +73,26 @@ public class BankSystem {
         if (inputtedChoice.equalsIgnoreCase("yes")) {
             for (BankAccount bankAccount : bankAccounts) {
                 if (bankAccount.getAccountNumber() == inputtedAccountNumber) {
-                    bankAccount.setAvailableBalance(bankAccount.getAvailableBalance() + inputtedAmountToDeposit);
+                    bankAccount.deposit(inputtedAmountToDeposit);
 
                     bankAccount.displayInfo();
-                    System.out.println("\nYour balance has been updated successfully!\n");
+                    alertDisplay("Your balance has been updated successfully!");
                 }
             }
-        } else {
-            System.out.println("Transaction cancelled.");
-        }
+        } else System.out.println("Transaction cancelled.");
     }
 
     static void checkBankBalance() {
         System.out.print("Enter account number: ");
         int inputtedAccountNumber = Integer.parseInt(input.nextLine());
 
-        for (BankAccount bankAccount : bankAccounts) {
-            if (bankAccount.getAccountNumber() == inputtedAccountNumber) {
-                bankAccount.displayInfo();
-            }
-        }
+        for (BankAccount bankAccount : bankAccounts)
+            if (bankAccount.getAccountNumber() == inputtedAccountNumber) bankAccount.displayInfo();
     }
 
     static void viewAllAccount() {
-        for (BankAccount bankAccount : bankAccounts) {
-            bankAccount.displayInfo();
-        }
+        if (bankAccounts.isEmpty()) alertDisplay("No account has been added yet.");
+        else for (BankAccount bankAccount : bankAccounts) bankAccount.displayInfo();
     }
 
     static void createAccount() {
@@ -120,23 +109,37 @@ public class BankSystem {
             inputtedInitialDepositedAmount = Integer.parseInt(input.nextLine());
         }
 
+        for (BankAccount bankAccount : bankAccounts) {
+            if (bankAccount.getAccountNumber() == inputtedAccountNumber) {
+                alertDisplay("Error. An account with the same number exists!");
+
+                return;
+            }
+        }
+
         bankAccounts.add(
                 new BankAccount(
-                    inputtedAccountNumber,
-                    inputtedHolderName,
-                    inputtedInitialDepositedAmount
+                        inputtedAccountNumber,
+                        inputtedHolderName,
+                        inputtedInitialDepositedAmount
                 )
         );
-        System.out.println("Account created successfully!");
+        alertDisplay("Account created successfully!");
     }
 
     static void displayUserOptions() {
-        System.out.println("=== Bank Menu ===");
+        System.out.println("\n=== Bank Menu ===");
         System.out.println("1. Create Account");
         System.out.println("2. View All Accounts");
         System.out.println("3. Check Balance");
         System.out.println("4. Deposit");
         System.out.println("5. Withdraw");
         System.out.println("6. Exit");
+    }
+
+    static void alertDisplay(String message) {
+        System.out.println("\n======================================");
+        System.out.println(message);
+        System.out.println("======================================\n");
     }
 }

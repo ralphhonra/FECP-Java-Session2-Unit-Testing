@@ -17,18 +17,6 @@ public class BankAccount implements BankFunctions {
         return accountNumber;
     }
 
-    public void setAccountNumber(int accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
-    public String getBankHolderName() {
-        return bankHolderName;
-    }
-
-    public void setBankHolderName(String bankHolderName) {
-        this.bankHolderName = bankHolderName;
-    }
-
     public int getAvailableBalance() {
         return availableBalance;
     }
@@ -38,13 +26,13 @@ public class BankAccount implements BankFunctions {
     }
 
     @Override
-    public void deposit(int addedAmount, int accountNumber) {
-
+    public void deposit(int addedAmount) {
+        setAvailableBalance(this.availableBalance + addedAmount);
     }
 
     @Override
-    public void withdraw(int withdrawAmount, int accountNumber) {
-
+    public void withdraw(int withdrawAmount) {
+        setAvailableBalance(this.availableBalance - withdrawAmount);
     }
 
     @Override

@@ -1,8 +1,8 @@
 package org.example;
 
 public interface BankFunctions {
-    void deposit(int addedAmount, int accountNumber);
-    void withdraw(int withdrawAmount, int accountNumber);
+    void deposit(int addedAmount);
+    void withdraw(int withdrawAmount);
     void displayInfo();
     int getAccountNumber(String name);
 }
