@@ -28,7 +28,7 @@ public class BankSystem {
             else if (inputtedChoice == 5) withdrawAmount();
             else if (inputtedChoice == 6) break;
             else {
-                System.out.println("Invalid input!");
+                alertDisplay("Invalid input!");
                 continue;
             }
 
@@ -55,7 +55,7 @@ public class BankSystem {
                         System.out.println("\n======================================");
                         System.out.println("Your balance has been updated successfully!");
                         System.out.println("======================================\n");
-                    } else System.out.println("Invalid transaction!");
+                    } else alertDisplay("Insufficient balance. Invalid transaction!");
 
                 }
             }
