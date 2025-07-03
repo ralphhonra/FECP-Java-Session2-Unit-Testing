@@ -30,7 +30,7 @@ public class BankSystem {
             } else if (inputtedChoice == 4) {
                 depositAmount();
             } else if (inputtedChoice == 5) {
-
+                withdrawAmount();
             } else if (inputtedChoice == 6) {
                 break;
             }
@@ -40,19 +40,47 @@ public class BankSystem {
         } while (returnToMenu.equalsIgnoreCase("yes"));
     }
 
+    static void withdrawAmount() {
+        System.out.print("Enter your account number: ");
+        int inputtedAccountNumber = Integer.parseInt(input.nextLine());
+        System.out.print("Enter amount to withdraw: ");
+        int inputtedAmountToWithdraw = Integer.parseInt(input.nextLine());
+        System.out.print("Are you sure you want to proceed? (yes/no): ");
+        String inputtedChoice = input.nextLine();
+
+        if (inputtedChoice.equalsIgnoreCase("yes")) {
+            for (BankAccount bankAccount : bankAccounts) {
+                if (bankAccount.getAccountNumber() == inputtedAccountNumber) {
+                    if (bankAccount.getAvailableBalance() - inputtedAmountToWithdraw > 0) {
+                        bankAccount.setAvailableBalance(bankAccount.getAvailableBalance() - inputtedAmountToWithdraw);
+
+                        bankAccount.displayInfo();
+                        System.out.println("\nYour balance has been updated successfully!\n");
+                    } else {
+                        System.out.println("Invalid transaction!");
+                    }
+
+                }
+            }
+        } else {
+            System.out.println("Transaction cancelled.");
+        }
+    }
+
     static void depositAmount() {
         System.out.print("Enter your account number: ");
         int inputtedAccountNumber = Integer.parseInt(input.nextLine());
         System.out.print("Enter amount to deposit: ");
         int inputtedAmountToDeposit = Integer.parseInt(input.nextLine());
         System.out.print("Are you sure you want to proceed? (yes/no): ");
-        String inputtedChoice = input.next();
+        String inputtedChoice = input.nextLine();
 
         if (inputtedChoice.equalsIgnoreCase("yes")) {
             for (BankAccount bankAccount : bankAccounts) {
                 if (bankAccount.getAccountNumber() == inputtedAccountNumber) {
                     bankAccount.setAvailableBalance(bankAccount.getAvailableBalance() + inputtedAmountToDeposit);
 
+                    bankAccount.displayInfo();
                     System.out.println("\nYour balance has been updated successfully!\n");
                 }
             }
