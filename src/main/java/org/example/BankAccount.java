@@ -1,6 +1,6 @@
 package org.example;
 
-public class BankAccount {
+public class BankAccount implements BankFunctions {
     private int accountNumber;
     private String bankHolderName;
     private int availableBalance;
@@ -27,5 +27,25 @@ public class BankAccount {
 
     public void setAvailableBalance(int availableBalance) {
         this.availableBalance = availableBalance;
+    }
+
+    @Override
+    public void deposit(int addedAmount, int accountNumber) {
+        
+    }
+
+    @Override
+    public void withdraw(int withdrawAmount, int accountNumber) {
+
+    }
+
+    @Override
+    public String displayInfo() {
+        return "";
+    }
+
+    @Override
+    public int getAccountNumber(String name) {
+        return 0;
     }
 }
