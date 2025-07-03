@@ -5,6 +5,14 @@ public class BankAccount implements BankFunctions {
     private String bankHolderName;
     private int availableBalance;
 
+    public BankAccount() {}
+
+    public BankAccount(int accountNumber, String bankHolderName, int availableBalance) {
+        this.accountNumber = accountNumber;
+        this.bankHolderName = bankHolderName;
+        this.availableBalance = availableBalance;
+    }
+
     public int getAccountNumber() {
         return accountNumber;
     }
@@ -31,7 +39,7 @@ public class BankAccount implements BankFunctions {
 
     @Override
     public void deposit(int addedAmount, int accountNumber) {
-        
+
     }
 
     @Override
@@ -40,8 +48,12 @@ public class BankAccount implements BankFunctions {
     }
 
     @Override
-    public String displayInfo() {
-        return "";
+    public void displayInfo() {
+        System.out.println("\n======================================");
+        System.out.println("Account name: " + bankHolderName);
+        System.out.println("Account number: " + accountNumber);
+        System.out.println("Account balance: " + availableBalance);
+        System.out.println("======================================\n");
     }
 
     @Override
