@@ -38,6 +38,8 @@ public class BankSystem {
     }
 
     static void withdrawAmount() {
+        Scanner input = new Scanner(System.in);
+
         System.out.print("Enter your account number: ");
         int inputtedAccountNumber = Integer.parseInt(input.nextLine());
         System.out.print("Enter amount to withdraw: ");

@@ -19,7 +19,7 @@ class BankSystemTest {
     @BeforeEach
     void setUp() {
         BankSystem.bankAccounts.clear(); // Use the same list from BankSystem
-        BankSystem.bankAccounts.add(new BankAccount(12345, "Test name", 0));
+        BankSystem.bankAccounts.add(new BankAccount(12345, "Test name", 1000));
         System.setOut(new PrintStream(outputStream));
     }
 
@@ -51,5 +51,17 @@ class BankSystemTest {
         String output = outputStream.toString();
 
         assertTrue(output.contains("Error. Please input an invalid amount."));
+    }
+
+    @Test
+    void testWithdrawAmountWithValidInteger() {
+        String simulatedInput = "12345\n500\nyes\n";
+        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
+
+        BankSystem.withdrawAmount();
+
+        String output = outputStream.toString();
+
+        assertTrue(output.contains("Your balance has been updated successfully!"));
     }
 }
