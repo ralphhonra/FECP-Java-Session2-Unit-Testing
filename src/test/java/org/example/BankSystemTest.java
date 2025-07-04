@@ -77,5 +77,15 @@ class BankSystemTest {
         assertTrue(output.contains("Error. Please input an invalid amount."));
     }
 
+    @Test
+    void testWithdrawAmountWithExceedingAmountInteger() {
+        String simulatedInput = "12345\n1500\nyes\n";
+        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
 
+        BankSystem.withdrawAmount();
+
+        String output = outputStream.toString();
+
+        assertTrue(output.contains("Insufficient balance. Invalid transaction!"));
+    }
 }
