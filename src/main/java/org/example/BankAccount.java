@@ -46,7 +46,7 @@ public class BankAccount implements BankFunctions {
     }
 
     @Override
-    public int getAccountNumber(String name) {
-        return 0;
+    public int getAccountNumber(int accountNumber) {
+        return this.accountNumber;
     }
 }

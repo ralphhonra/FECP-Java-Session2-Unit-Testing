@@ -4,5 +4,5 @@ public interface BankFunctions {
     void deposit(int addedAmount);
     void withdraw(int withdrawAmount);
     void displayInfo();
-    int getAccountNumber(String name);
+    int getAccountNumber(int accountNumber);
 }

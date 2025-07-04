@@ -88,4 +88,16 @@ class BankSystemTest {
 
         assertTrue(output.contains("Insufficient balance. Invalid transaction!"));
     }
+
+    @Test
+    void testGetAccountNumberWithNoExistingAccount() {
+        String simulatedInput = "123\n";
+        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
+
+        BankSystem.getAccountNumber();
+
+        String output = outputStream.toString();
+
+        assertTrue(output.contains("Account not found."));
+    }
 }

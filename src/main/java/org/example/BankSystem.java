@@ -166,4 +166,19 @@ public class BankSystem {
         System.out.println(message);
         System.out.println("======================================\n");
     }
+
+    static void getAccountNumber() {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter account number: ");
+        int inputtedAccountNumber = Integer.parseInt(input.nextLine());
+
+        for (BankAccount bankAccount : bankAccounts) {
+            if (bankAccount.getAccountNumber() == inputtedAccountNumber) {
+                bankAccount.displayInfo();
+                return;
+            }
+        }
+
+        System.out.println("Account not found.");
+    }
 }
