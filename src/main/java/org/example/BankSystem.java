@@ -63,10 +63,19 @@ public class BankSystem {
     }
 
     static void depositAmount() {
+        Scanner input = new Scanner(System.in);
         System.out.print("Enter your account number: ");
         int inputtedAccountNumber = Integer.parseInt(input.nextLine());
-        System.out.print("Enter amount to deposit: ");
-        int inputtedAmountToDeposit = Integer.parseInt(input.nextLine());
+
+        int inputtedAmountToDeposit;
+        while (true) {
+            System.out.print("Enter amount to deposit: ");
+            inputtedAmountToDeposit = Integer.parseInt(input.nextLine());
+
+            if (inputtedAmountToDeposit < 0) System.out.println("Error. Please input an invalid amount.");
+            else break;
+        }
+
         System.out.print("Are you sure you want to proceed? (yes/no): ");
         String inputtedChoice = input.nextLine();
 
@@ -105,8 +114,13 @@ public class BankSystem {
 
         int inputtedInitialDepositedAmount = 0;
         if (inputtedInitialDepositChoice.equalsIgnoreCase("yes")) {
-            System.out.print("Enter initial deposit amount: ");
-            inputtedInitialDepositedAmount = Integer.parseInt(input.nextLine());
+            while (true) {
+                System.out.print("Enter initial deposit amount: ");
+                inputtedInitialDepositedAmount = Integer.parseInt(input.nextLine());
+
+                if (inputtedInitialDepositedAmount < 0) System.out.println("Error. Please input an invalid amount.");
+                else break;
+            }
         }
 
         for (BankAccount bankAccount : bankAccounts) {
