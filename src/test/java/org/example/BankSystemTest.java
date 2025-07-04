@@ -100,4 +100,16 @@ class BankSystemTest {
 
         assertTrue(output.contains("Account not found."));
     }
+
+    @Test
+    void testCreateAccountWithNoDeposits() {
+        String simulatedInput = "123\nHost name\nyes\n0";
+        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
+
+        BankSystem.createAccount();
+
+        String output = outputStream.toString();
+
+        assertTrue(output.contains("Account created successfully!"));
+    }
 }

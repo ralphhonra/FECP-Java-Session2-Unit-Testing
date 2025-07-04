@@ -115,6 +115,8 @@ public class BankSystem {
     }
 
     static void createAccount() {
+        Scanner input = new Scanner(System.in);
+
         System.out.print("Enter Account Number: ");
         int inputtedAccountNumber = Integer.parseInt(input.nextLine());
         System.out.print("Enter Holder Name: ");
