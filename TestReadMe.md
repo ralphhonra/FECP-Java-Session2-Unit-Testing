@@ -1,0 +1,1 @@
+![](picture_proof_5.jpeg)
