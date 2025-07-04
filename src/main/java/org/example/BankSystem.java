@@ -42,8 +42,16 @@ public class BankSystem {
 
         System.out.print("Enter your account number: ");
         int inputtedAccountNumber = Integer.parseInt(input.nextLine());
-        System.out.print("Enter amount to withdraw: ");
-        int inputtedAmountToWithdraw = Integer.parseInt(input.nextLine());
+
+        int inputtedAmountToWithdraw;
+        while (true) {
+            System.out.print("Enter amount to withdraw: ");
+            inputtedAmountToWithdraw = Integer.parseInt(input.nextLine());
+
+            if (inputtedAmountToWithdraw < 0) System.out.println("Error. Please input an invalid amount.");
+            else break;
+        }
+
         System.out.print("Are you sure you want to proceed? (yes/no): ");
         String inputtedChoice = input.nextLine();
 

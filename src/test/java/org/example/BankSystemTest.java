@@ -42,7 +42,7 @@ class BankSystemTest {
     }
 
     @Test
-    void testDepositAmountWithInvalidInteger() {
+    void testDepositAmountWithNegativeInteger() {
         String simulatedInput = "12345\n-1000\n0\nyes\n";
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
 
@@ -64,4 +64,18 @@ class BankSystemTest {
 
         assertTrue(output.contains("Your balance has been updated successfully!"));
     }
+
+    @Test
+    void testWithdrawAmountWithNegativeInteger() {
+        String simulatedInput = "12345\n-500\n500\nyes\n";
+        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
+
+        BankSystem.withdrawAmount();
+
+        String output = outputStream.toString();
+
+        assertTrue(output.contains("Error. Please input an invalid amount."));
+    }
+
+
 }
