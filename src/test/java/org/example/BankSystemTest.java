@@ -43,6 +43,13 @@ class BankSystemTest {
 
     @Test
     void testDepositAmountWithInvalidInteger() {
+        String simulatedInput = "12345\n-1000\n0\nyes\n";
+        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
 
+        BankSystem.depositAmount();
+
+        String output = outputStream.toString();
+
+        assertTrue(output.contains("Error. Please input an invalid amount."));
     }
 }
